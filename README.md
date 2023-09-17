@@ -77,3 +77,186 @@ Worked with and helped multiple peers for this project, a specic thank you to Ad
 Sleepless Nights
 Drink: Zero Sugar Sweet Tea
 Music: [Oliver Anthony](https://open.spotify.com/artist/6IkfE2JyVoKwBZXvuytKX3?si=c660d0c76c6b4b67)
+
+
+
+## Questions and Answers
+
+*Question 1:** What is the average price for a four-bedroom house sold for each year? Round off your answer to two decimal places.
+
+```sql
+SELECT YEAR(date) AS year,
+       ROUND(AVG(price), 2) AS average_price
+FROM home_sales
+WHERE bedrooms = 4
+GROUP BY YEAR(date)
+ORDER BY year;
+The average price for a four-bedroom house sold for each year is as follows:
+
+year	average_price
+2019	300263.70
+2020	298353.78
+2021	301819.44
+2022	296363.88
+vbnet
+
+
+#### Average Price of Homes Built with Three Bedrooms and Three Bathrooms Each Year
+
+To calculate the average price of a home for each year it was built that has three bedrooms and three bathrooms, we can use SparkSQL. The result will be rounded to two decimal places.
+
+
+Question 2:** What is the average price of a home for each year it was built that has three bedrooms and three bathrooms? Round off your answer to two decimal places.
+
+```sql
+SELECT date_built,
+       ROUND(AVG(price), 2) AS average_price
+FROM home_sales
+WHERE bedrooms = 3
+  AND bathrooms = 3
+GROUP BY date_built
+ORDER BY date_built;
+The average price of a home for each year it was built that has three bedrooms and three bathrooms is as follows:
+
+date_built	average_price
+2010	292859.62
+2011	291117.47
+2012	293683.19
+2013	295962.27
+2014	290852.27
+2015	288770.30
+2016	290555.07
+2017	292676.79
+
+#### Average Price of Homes with Specific Criteria Each Year
+
+To find the average price of a home for each year that has three bedrooms, three bathrooms, two floors, and is greater than or equal to 2,000 square feet, we can use SparkSQL. The result will be rounded to two decimal places.
+
+
+**Question 3:** What is the average price of a home for each year that has three bedrooms, three bathrooms, two floors, and is greater than or equal to 2,000 square feet? Round off your answer to two decimal places.
+
+```sql
+SELECT date_built,
+       ROUND(AVG(price), 2) AS average_price
+FROM home_sales
+WHERE bedrooms = 3
+  AND bathrooms = 3
+  AND floors = 2
+  AND sqft_living >= 2000
+GROUP BY date_built
+ORDER BY date_built;
+The average price of a home for each year that meets the specified criteria is as follows:
+
+date_built	average_price
+2010	285010.22
+2011	276553.81
+2012	307539.97
+2013	303676.79
+2014	298264.72
+2015	297609.97
+2016	293965.10
+2017	280317.58
+vbnet
+
+
+#### "View" Rating for Homes Costing More Than or Equal to $350,000
+
+To determine the "view" rating for homes costing more than or equal to $350,000, we can use SparkSQL. The result will be rounded to two decimal places, and the query runtime will also be provided.
+
+
+**Question 4:** What is the "view" rating for homes costing more than or equal to $350,000? Determine the run time for this query, and round off your answer to two decimal places.
+sql
+SELECT view,
+       ROUND(AVG(price), 2) AS average_price
+FROM home_sales
+WHERE price >= 350000
+
+
+
+User
+Can you please put everything in the markdown language?
+ChatGPT
+Certainly! Here are the questions and answers in Markdown format:
+
+Question 1: Average Price for Four-Bedroom Houses Sold Each Year
+What is the average price for a four-bedroom house sold for each year? Round off your answer to two decimal places.
+
+sql
+
+SELECT YEAR(date) AS year,
+       ROUND(AVG(price), 2) AS average_price
+FROM home_sales
+WHERE bedrooms = 4
+GROUP BY YEAR(date)
+ORDER BY year;
+The average price for a four-bedroom house sold for each year is as follows:
+
+year	average_price
+2019	300263.70
+2020	298353.78
+2021	301819.44
+2022	296363.88
+Question 2: Average Price of Homes Built with Three Bedrooms and Three Bathrooms Each Year
+What is the average price of a home for each year it was built that has three bedrooms and three bathrooms? Round off your answer to two decimal places.
+
+sql
+
+SELECT date_built,
+       ROUND(AVG(price), 2) AS average_price
+FROM home_sales
+WHERE bedrooms = 3
+  AND bathrooms = 3
+GROUP BY date_built
+ORDER BY date_built;
+The average price of a home for each year it was built that has three bedrooms and three bathrooms is as follows:
+
+date_built	average_price
+2010	292859.62
+2011	291117.47
+2012	293683.19
+2013	295962.27
+2014	290852.27
+2015	288770.30
+2016	290555.07
+2017	292676.79
+Question 3: Average Price of Homes with Specific Criteria Each Year
+What is the average price of a home for each year that has three bedrooms, three bathrooms, two floors, and is greater than or equal to 2,000 square feet? Round off your answer to two decimal places.
+
+sql
+
+SELECT date_built,
+       ROUND(AVG(price), 2) AS average_price
+FROM home_sales
+WHERE bedrooms = 3
+  AND bathrooms = 3
+  AND floors = 2
+  AND sqft_living >= 2000
+GROUP BY date_built
+ORDER BY date_built;
+The average price of a home for each year that meets the specified criteria is as follows:
+
+date_built	average_price
+2010	285010.22
+2011	276553.81
+2012	307539.97
+2013	303676.79
+2014	298264.72
+2015	297609.97
+2016	293965.10
+2017	280317.58
+Question 4: "View" Rating for Homes Costing More Than or Equal to $350,000
+What is the "view" rating for homes costing more than or equal to $350,000? Determine the run time for this query, and round off your answer to two decimal places.
+
+sql
+
+SELECT view,
+       ROUND(AVG(price), 2) AS average_price
+FROM home_sales
+WHERE price >= 350000
+GROUP BY view
+ORDER BY average_price DESC
+LIMIT 1;
+The "view" rating for homes costing more than or equal to $350,000 is as follows:
+
+view	average_price
+91	1137372.73
